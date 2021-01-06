@@ -21,36 +21,27 @@ code for Selected Topics in Visual Recognition using Deep Learning Homework 4
 
 1. Clone this repository
 
-2. download the datasets from https://drive.google.com/drive/folders/1H-sIY7zj42Fex1ZjxxSC3PV1pK4Mij6x. And make sure that 
+2. download the datasets from https://drive.google.com/drive/folders/1H-sIY7zj42Fex1ZjxxSC3PV1pK4Mij6x.  
+
+3. Run ***./scripts/Prepare_TrainData_HR_LR.m*** in Matlab to generate HR/LR training pairs with corresponding degradation model and scale factor.
+
+4. Edit ***./options/train/train_SRFBN_example.json*** for your needs.
+
+5. Then, run command:
 ```bash
-# Train a new model starting from ImageNet weights.  
-# We use HW3's train_images as our dataset.  
-python3 samples/coco/coco.py train --dataset=/path/to/train_images/ --model=imagenet
-
-# Continue training the last model you trained. This will find the last trained weights in the model directory.
-python3 samples/coco/coco.py train --dataset=/path/to/train_images/ --model=last
+python train.py -opt options/train/train_SRFBN_example.json
 ```
 
-In coco.py, we preprocess the data and train our model.  
-The model's weights will be saved every single epoch in logs/
+6. The model weights will be saved in ***./experiments***
 
-## Output test.json by running test.py
+## Testing
 
-```bach
-python test.py
+1. Edit ***./options/test/test_SRFBN_example.json*** for your needs.
+
+2. Run command:
+```bash
+python test.py -opt options/test/test_SRFBN_example.json
 ```
 
-For testing data, we first load the test.json.
-```python
-cocoGt = COCO("../test.json")
-```
-Then we import the saved model.
-```python
-model = modellib.MaskRCNN(mode="inference", config=config, model_dir='logs/')
-model_path = model.find_last()
-model.load_weights(model_path, by_name=True)
-```
-After predicting results, we transform the output to perpare the submission.json file.  
-In the end, write 'image_id', 'category_id', 'segmentation' and 'score' result to a submission.josn file.  
-Upload google drive submission.  
-Best accuracy : mAP : 0.47644.  
+Upload the output images into the google drive and compute psnr.
+Best psnr : 25.922.  
