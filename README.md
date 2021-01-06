@@ -23,20 +23,22 @@ code for Selected Topics in Visual Recognition using Deep Learning Homework 4
 
 2. download the datasets from https://drive.google.com/drive/folders/1H-sIY7zj42Fex1ZjxxSC3PV1pK4Mij6x.  
 
-3. Run ***./scripts/Prepare_TrainData_HR_LR.m*** in Matlab to generate HR/LR training pairs with corresponding degradation model and scale factor.
+3. Run ```./scripts/Prepare_TrainData_HR_LR.m``` in Matlab to generate HR/LR training pairs with corresponding degradation model and scale factor.
 
-4. Edit ***./options/train/train_SRFBN_example.json*** for your needs.
+4. Edit ```./options/train/train_SRFBN_example.json``` for your needs.
 
 5. Then, run command:
 ```bash
 python train.py -opt options/train/train_SRFBN_example.json
 ```
 
-6. The model weights will be saved in ***./experiments***
+6. The model weights will be saved in ```./experiments```
 
 ## Testing
 
-1. Edit ***./options/test/test_SRFBN_example.json*** for your needs.
+1. Edit ```./options/test/test_SRFBN_example.json``` for your needs.
+
+2. Place your own images to ```./results/LR/MyImage```
 
 2. Run command:
 ```bash
